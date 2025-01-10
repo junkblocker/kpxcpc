@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2020 cupnoodles
+// # Copyright (c) 2020 cupnoodles
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,8 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-//
-//
 package main
 
 import (
@@ -37,7 +35,7 @@ import (
 	"strings"
 	"time"
 
-	"gitlab.com/nwwdles/kpxcpc/kpclient"
+	"github.com/junkblocker/kpxcpc/kpclient"
 )
 
 var (
