@@ -94,6 +94,7 @@ func (a *App) connect() error {
 		if conn, err = net.Dial("unix", s); err != nil {
 			continue
 		}
+		break
 	}
 	if err != nil {
 		return fmt.Errorf("error connecting to keepassxc: %w", err)
@@ -293,11 +294,22 @@ func main() {
 	}
 
 	if *socket == "" {
+		opts.sockets = []string{}
 		// keepassxc changed the socket name in some version
 		runtimeDir := os.Getenv("XDG_RUNTIME_DIR")
-		opts.sockets = []string{
-			filepath.Join(runtimeDir, "kpxc_server"),
-			filepath.Join(runtimeDir, "org.keepassxc.KeePassXC.BrowserServer"),
+		if runtimeDir != "" {
+			opts.sockets = append(opts.sockets,
+				filepath.Join(runtimeDir, "kpxc_server"),
+				filepath.Join(runtimeDir, "org.keepassxc.KeePassXC.BrowserServer"),
+			)
+		}
+		// Darwin
+		tmpDir := os.Getenv("TMPDIR")
+		if tmpDir != "" {
+			opts.sockets = append(opts.sockets,
+				filepath.Join(tmpDir, "kpxc_server"),
+				filepath.Join(tmpDir, "org.keepassxc.KeePassXC.BrowserServer"),
+			)
 		}
 	} else {
 		opts.sockets = []string{*socket}
